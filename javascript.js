@@ -1,16 +1,14 @@
 let myLibrary = [];
 let table = document.getElementById("table");
 let tableCreated = 0;
-let readButton = document.createElement("button");
-readButton.classList.add("readButton");
-let removeButton = document.createElement("button")
-removeButton.classList.add("removeButton");
 
 function Book(title, author, read) {
         this.title = title;
         this.author = author;
         this.read = read;
 }
+
+document.getElementById("submit").onclick = addBookToLibrary;
 
 function addBookToLibrary() {
     let newTitle = document.getElementById("title").value;
@@ -35,6 +33,10 @@ function createRow(book){
     let authorCell = document.createElement("TD");
     let readCell = document.createElement("TD");
     let removeCell = document.createElement("TD");
+    let readButton = document.createElement("button");
+    readButton.classList.add("readButton");
+    let removeButton = document.createElement("button")
+    removeButton.classList.add("removeButton");
     newRow.appendChild(titleCell);
     newRow.appendChild(authorCell);
     newRow.appendChild(readCell);
@@ -45,9 +47,18 @@ function createRow(book){
     authorCell.textContent = book.author;
     readButton.textContent = book.read;
     removeButton.textContent = "Remove";
+    removeButtons();
 };
 
-document.getElementById("submit").onclick = addBookToLibrary;
+function removeButtons() {
+    let removeButtons = document.querySelectorAll(".removeButton");
+    removeButtons.forEach((removeButton) => {
+        removeButton.addEventListener("click", () => {
+            let targetRow = removeButton.closest('tr');
+            targetRow.parentNode.removeChild(targetRow);
+        })
+    })
+}
 
 const addButton = document.getElementById("add");
 addButton.addEventListener("click", displayForm);
