@@ -78,10 +78,6 @@ th, tr, td {
     color: white;
 }
 
-.readButton {
-    background-color: var(--button-color);
-}
-
 .removeButton {
     background-color: red;
 }
